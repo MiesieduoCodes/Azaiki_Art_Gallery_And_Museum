@@ -91,7 +91,7 @@ export default function Artists() {
         </div>
       </section>
 
-      {/* Search and Filter */}
+      {/* Search and Filter
       <section className="py-8 bg-gray-50 border-b border-gray-200">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -132,7 +132,7 @@ export default function Artists() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Featured Artists */}
       <section className="py-12">

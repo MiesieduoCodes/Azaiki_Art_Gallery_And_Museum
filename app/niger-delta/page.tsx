@@ -64,22 +64,22 @@ const nigerDeltaArtworks = [
 const themes = [
   {
     name: "Cultural Heritage",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/Culture.jpg",
     description: "Artworks celebrating the rich cultural traditions of Niger Delta communities.",
   },
   {
     name: "Environmental Concerns",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/Environment.jpg",
     description: "Works addressing environmental challenges and conservation in the region.",
   },
   {
     name: "Contemporary Life",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/Evolve.jpg",
     description: "Depictions of modern life and social dynamics in the Niger Delta.",
   },
   {
     name: "Traditional Crafts",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/Final.jpg",
     description: "Art inspired by and incorporating traditional craft techniques from the region.",
   },
 ]
@@ -193,11 +193,6 @@ export default function NigerDeltaArt() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {themes.map((theme, index) => (
-              <Link
-                key={index}
-                href={`/niger-delta/${theme.name.toLowerCase().replace(/\s+/g, "-")}`}
-                className="group"
-              >
                 <div className="flex flex-col md:flex-row bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
                   <div className="md:w-2/5 relative h-64 md:h-auto">
                     <Image src={theme.image || "/placeholder.svg"} alt={theme.name} fill className="object-cover" />
@@ -211,7 +206,6 @@ export default function NigerDeltaArt() {
                     </span>
                   </div>
                 </div>
-              </Link>
             ))}
           </div>
         </div>
@@ -234,12 +228,11 @@ export default function NigerDeltaArt() {
                   <p className="text-gray-600 text-sm mb-3">
                     {artwork.medium}, {artwork.period}
                   </p>
-                  <Link
-                    href={`/gallery/${artwork.id}`}
+                  <p
                     className="text-blue-700 font-medium flex items-center hover:text-blue-800"
                   >
                     View Details <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+                  </p>
                 </div>
               </div>
             ))}
