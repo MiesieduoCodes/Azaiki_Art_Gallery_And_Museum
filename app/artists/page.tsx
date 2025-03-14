@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image"
+import { useState } from 'react';
 import Link from "next/link"
 import { Search, Filter } from "lucide-react"
 
@@ -79,6 +81,23 @@ const artists = [
 ]
 
 export default function Artists() {
+  const [currentPage, setCurrentPage] = useState(1); // Track current page
+  const itemsPerPage = 4; // Number of items to display per page
+
+  // Calculate total number of pages
+  const totalPages = Math.ceil(artists.length / itemsPerPage);
+
+  // Get the items for the current page
+  const currentArtists = artists.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -170,7 +189,7 @@ export default function Artists() {
           <h2 className="section-subtitle mb-8">All Artists</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {artists.map((artist) => (
+            {currentArtists.map((artist) => (
               <Link key={artist.id} href={`/artists/${artist.id}`} className="group">
                 <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg hover:-translate-y-1">
                   <div className="relative h-64">
@@ -189,12 +208,31 @@ export default function Artists() {
           {/* Pagination */}
           <div className="mt-12 flex justify-center">
             <nav className="flex items-center gap-1">
-              <button className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Previous
               </button>
-              <button className="px-3 py-1 bg-blue-700 text-white rounded-md">1</button>
-              <button className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">2</button>
-              <button className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index + 1}
+                  onClick={() => handlePageChange(index + 1)}
+                  className={`px-3 py-1 border border-gray-300 rounded-md ${
+                    currentPage === index + 1
+                      ? "bg-blue-700 text-white"
+                      : "text-gray-600 hover:bg-gray-50"
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Next
               </button>
             </nav>

@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image"
 import Link from "next/link"
-import { Filter, Search } from "lucide-react"
+import { useState } from 'react';
+// import { Filter, Search } from "lucide-react"
 
 // Sample gallery data
 const galleryItems = [
@@ -88,9 +90,112 @@ const galleryItems = [
     category: "African",
     image: "/placeholder.svg?height=600&width=800",
   },
-]
+  {
+    id: 13,
+    title: "Golden Sunset",
+    artist: "Liam Brown",
+    category: "Contemporary",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 14,
+    title: "Desert Mirage",
+    artist: "Fatima Al-Mansoori",
+    category: "African",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 15,
+    title: "Cyber City",
+    artist: "Hiroshi Tanaka",
+    category: "Digital",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 16,
+    title: "Marble Elegance",
+    artist: "Giovanni Rossi",
+    category: "Sculpture",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 17,
+    title: "Mangrove Mysteries",
+    artist: "Chinwe Okoro",
+    category: "Niger Delta",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 18,
+    title: "Futuristic Visions",
+    artist: "Emma Watson",
+    category: "Digital",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 19,
+    title: "Ancient Relics",
+    artist: "Ahmed Hassan",
+    category: "Sculpture",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 20,
+    title: "Savannah Rhythms",
+    artist: "Amina Diallo",
+    category: "African",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 21,
+    title: "Ocean Depths",
+    artist: "Marina Petrova",
+    category: "Contemporary",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 22,
+    title: "Neon Dreams",
+    artist: "Ryan Carter",
+    category: "Digital",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 23,
+    title: "Clay Creations",
+    artist: "Maria Gonzalez",
+    category: "Sculpture",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    id: 24,
+    title: "Delta Reflections",
+    artist: "Obinna Nwankwo",
+    category: "Niger Delta",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+];
+
+
 
 export default function Gallery() {
+  const [currentPage, setCurrentPage] = useState(1); // Track current page
+  const itemsPerPage = 8; 
+
+  // Calculate total number of pages
+  const totalPages = Math.ceil(galleryItems.length / itemsPerPage);
+
+  // Get the items for the current page
+  const currentItems = galleryItems.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -103,7 +208,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Gallery Filters */}
+      {/* Gallery Filters
       <section className="py-8 bg-gray-50 border-b border-gray-200">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -142,13 +247,13 @@ export default function Gallery() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Gallery Grid */}
-      <section className="py-12">
+    {/* Gallery Grid */}
+    <section className="py-12">
         <div className="container-custom">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {galleryItems.map((item) => (
+            {currentItems.map((item) => (
               <div key={item.id} className="group">
                 <Link href={`/gallery/${item.id}`} className="block">
                   <div className="relative overflow-hidden rounded-lg shadow-md aspect-square">
@@ -176,22 +281,37 @@ export default function Gallery() {
           {/* Pagination */}
           <div className="mt-12 flex justify-center">
             <nav className="flex items-center gap-1">
-              <button className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Previous
               </button>
-              <button className="px-3 py-1 bg-blue-700 text-white rounded-md">1</button>
-              <button className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">2</button>
-              <button className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">3</button>
-              <span className="px-2 text-gray-500">...</span>
-              <button className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">10</button>
-              <button className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index + 1}
+                  onClick={() => handlePageChange(index + 1)}
+                  className={`px-3 py-1 border border-gray-300 rounded-md ${
+                    currentPage === index + 1
+                      ? "bg-blue-700 text-white"
+                      : "text-gray-600 hover:bg-gray-50"
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Next
               </button>
             </nav>
           </div>
         </div>
       </section>
-
       {/* Featured Collections */}
       <section className="py-12 bg-gray-50">
         <div className="container-custom">

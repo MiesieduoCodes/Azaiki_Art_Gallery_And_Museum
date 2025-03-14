@@ -5,8 +5,9 @@ import { Menu, X, ChevronDown } from "lucide-react"
 
 const navigation = [
   { name: "About", href: "/about" },
+  { name: "Gallery", href: "/gallery" },
   {
-    name: "Gallery",
+    name: "Collection",
     href: "#",
     children: [
       { name: "African Art", href: "/african" },
