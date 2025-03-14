@@ -218,11 +218,17 @@ export default function Contact() {
 
               <div className="relative h-80 rounded-lg overflow-hidden shadow-md">
                 {/* This would be a map in a real implementation */}
-                <div className="absolute inset-0 bg-gray-300 flex items-center justify-center">
-                  <MapPin className="h-12 w-12 text-gray-500" />
-                  <span className="sr-only">Map location of ArtVista Museum</span>
-                </div>
-              </div>
+                <div className="mt-12 h-[400px] rounded-lg overflow-hidden"><iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.5325287543586!2d6.2917568!3d4.9076056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x106a05622743bcc3%3A0xaa026f4b0cafb83a!2sBayelsa+Tech+Hub!5e0!3m2!1sen!2sng!4v1635789072963!5m2!1sen!2sng"
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+    ></iframe>
+    </div>
+    </div>
             </div>
           </div>
         </div>

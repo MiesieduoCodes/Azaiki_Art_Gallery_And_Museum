@@ -88,8 +88,8 @@ export default function NigerDeltaArt() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative bg-blue-700 text-white py-20">
-        <div className="absolute inset-0 opacity-20 bg-[url('/placeholder.svg?height=1080&width=1920')] bg-cover bg-center"></div>
+      <section className="relative bg-blue-500 text-white py-20">
+        <div className="absolute inset-0 opacity-20 bg-[url('/images/nigerdelta.jpg')] bg-cover bg-center"></div>
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Niger Delta Art Collection</h1>
@@ -133,7 +133,7 @@ export default function NigerDeltaArt() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/placeholder.svg?height=800&width=1200"
+                src="/images/SideNigerdelta.jpg"
                 alt="Niger Delta art exhibition"
                 fill
                 className="object-cover"
